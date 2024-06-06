@@ -9,17 +9,18 @@ import { diffDays } from "utility/utils"
 
 export interface NewsListItemProps {
     item: ChampNews
+    forcenew?: boolean
 }
 
 
 
 export const NewsListItem: React.FC<NewsListItemProps> = (props) => {
 
-    const { item } = props
+    const { item, forcenew } = props
     const reloadNews = useReloadNews()
     
     const date = useMemo(() => (new Date(item.published_at)).toLocaleDateString('en-US'), [item.published_at])
-    const isnew = useMemo(() => diffDays(new Date(item.published_at), new Date()) < CONFIG_NEW_TAGDELTADAYS, [item])
+    const isnew = useMemo(() => forcenew || diffDays(new Date(item.published_at), new Date()) < CONFIG_NEW_TAGDELTADAYS, [item])
 
 
     const deleteNews = useCallback((item: ChampNews) => async () => {

@@ -9,12 +9,13 @@ export interface NewsListProps {
     pageSize?: number
     postAgeLimit?: number
     title?: string
+    forcenew?: boolean
 }
 
 
 
 export const NewsList: React.FC<NewsListProps> = (props) =>{
-    const { limit, pageSize, postAgeLimit } = props
+    const { limit, pageSize, postAgeLimit, forcenew } = props
     const [page, setPage] = useState(1)
     const [size, setSize] = useState(pageSize || 10)
     const reloadNews = useReloadNews()
@@ -60,7 +61,7 @@ export const NewsList: React.FC<NewsListProps> = (props) =>{
             footer={!fixedSize ? <Pagination showSizeChanger current={page} pageSize={size} responsive onChange={onPageChange} total={mediaSized.length} /> : <></>}
             bordered
             dataSource={mediaSized}
-            renderItem={(item) => <NewsListItem key={`list_${item.id}`} item={item} />}
+            renderItem={(item) => <NewsListItem key={`list_${item.id}`} item={item} forcenew={forcenew} />}
             />
         </>
 )};

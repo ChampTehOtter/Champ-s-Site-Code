@@ -2,7 +2,7 @@
   "name": "champtehotter.com",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://valphusky.github.io/champsite",
+  "homepage": ".",
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "@mui/material": "^5.14.20",

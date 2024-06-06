@@ -5,7 +5,7 @@ import Title from "antd/es/typography/Title";
 import { MediaList } from "components";
 import { NewsList } from "components/newlist";
 import PageCounter from "components/pagecounter";
-import { CONFIG_NEW_TAGDELTADAYS } from "configs";
+import { CONFIG_NEW_HYPNO_LIMIT, CONFIG_NEW_STORIES_LIMIT, CONFIG_NEW_TAGDELTADAYS } from "configs";
 import { MEDIA_SECTIONS } from "store";
 
 export const HomePage: React.FC<IResourceComponentsProps> = () => {
@@ -58,9 +58,10 @@ export const HomePage: React.FC<IResourceComponentsProps> = () => {
               // xl={{ span: 4, offset: 10 }}
           >
               <MediaList 
-                postAgeLimit={CONFIG_NEW_TAGDELTADAYS}
+                limit={CONFIG_NEW_STORIES_LIMIT}
                 section={MEDIA_SECTIONS.STORIES}
-                title="New Stories" 
+                title="New Stories"
+                forcenew
               />
           </Col>
       </Row>
@@ -73,9 +74,10 @@ export const HomePage: React.FC<IResourceComponentsProps> = () => {
               // xl={{ span: 4, offset: 10 }}
           >
               <MediaList 
-                postAgeLimit={CONFIG_NEW_TAGDELTADAYS} 
+                limit={CONFIG_NEW_HYPNO_LIMIT} 
                 section={MEDIA_SECTIONS.HYPNO}
-                title="New Hypno" 
+                title="New Hypno"
+                forcenew
               />
           </Col>
       </Row>
@@ -88,8 +90,9 @@ export const HomePage: React.FC<IResourceComponentsProps> = () => {
               // xl={{ span: 4, offset: 10 }}
           >
               <NewsList 
-                postAgeLimit={CONFIG_NEW_TAGDELTADAYS} 
+                limit={CONFIG_NEW_STORIES_LIMIT} 
                 title="News" 
+                forcenew
               />
           </Col>
       </Row>

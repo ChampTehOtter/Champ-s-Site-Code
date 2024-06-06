@@ -8,9 +8,8 @@ export const StoriesPage: React.FC<IResourceComponentsProps> = () => {
     <>
       <Row>
           <Col
-              xs={{ span:22, offset: 1 }} 
-              sm={{ span: 20, offset: 2}} 
-              md={{ span: 12, offset: 6}} 
+              xs={{ span: 22, offset: 1 }} 
+              sm={{ span: 18, offset: 3}}
               // lg={{ span: 8, offset: 8}} 
               // xl={{ span: 4, offset: 10 }}
           >

@@ -50,22 +50,20 @@ export const useChampStore = create<Store>((set, get) => ({
   reloadMedia: async () => {
     const media = await serviceGetMedia()
     if (media) {
+        console.log('Media Loaded', media)
         set((state) => ({ media: [...media] }))
     }
   },
   reloadNews: async () => {
     const news = await serviceGetNews()
-    console.log('NEWS', news)
     if (news) {
         set((state) => ({ news: [...news] }))
     }
   },
   getViews: async () => {
     const currentViews = get().views
-    console.log('CURRENT VIEWS', currentViews)
     if (!currentViews) {
       const counts = await getViews()
-      console.log('COUNTS', counts)
       if (counts) {
         set((state) => ({ views: counts }))
       }

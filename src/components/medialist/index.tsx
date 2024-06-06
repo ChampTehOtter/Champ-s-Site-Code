@@ -11,16 +11,17 @@ export interface MediaListProps {
     pageSize?: number
     postAgeLimit?: number
     title?: string
+    forcenew?: boolean
 }
 
 
 
 
 export const MediaList: React.FC<MediaListProps> = (props) =>{
-    const { limit, pageSize, postAgeLimit } = props
+    const { limit, pageSize, postAgeLimit, forcenew } = props
     const [page, setPage] = useState(1)
     const [size, setSize] = useState(pageSize || 10)
-    const [sortKey, setSortKey] = useState("1")
+    const [sortKey, setSortKey] = useState("3")
     const media = useMediaBySection(props.section)
     const reloadMedia = useReloadMedia()
 
@@ -34,7 +35,7 @@ export const MediaList: React.FC<MediaListProps> = (props) =>{
         } else if (sortKey === '2') {
             return media.sort((i1, i2)=> i1.title < i2.title ? 1 : -1)
         } else if (sortKey === '3') {
-            return media.sort((i1, i2)=> (new Date(i1.published_at) < (new Date(i2.published_at)) ? 1 : -1))
+            return media.sort((i1, i2)=> (new Date(i1.created_at) < (new Date(i2.created_at)) ? 1 : -1))
         }
         return media
         
@@ -46,7 +47,7 @@ export const MediaList: React.FC<MediaListProps> = (props) =>{
         } else if (postAgeLimit) {
             
             return mediaSorted.filter(i =>{
-                const age = diffDays(new Date(i.published_at), new Date())
+                const age = diffDays(new Date(i.created_at), new Date())
                 return age < postAgeLimit
             })
         }
@@ -72,11 +73,11 @@ export const MediaList: React.FC<MediaListProps> = (props) =>{
         <>
             <Divider style={{ textTransform: 'capitalize' }} orientation="left">{props.title||props.section}</Divider>
             <List
-            header={<HelpTools onSortClick={onSortClick} sortKey={sortKey} fixedSize={fixedSize} page={page} size={size} onPageChange={onPageChange} length={mediaSized.length} />}
-            footer={<HelpTools onSortClick={onSortClick} sortKey={sortKey} fixedSize={fixedSize} page={page} size={size} onPageChange={onPageChange} length={mediaSized.length} />}
+            header={!forcenew && <HelpTools onSortClick={onSortClick} sortKey={sortKey} fixedSize={fixedSize} page={page} size={size} onPageChange={onPageChange} length={mediaSorted.length} />}
+            footer={!forcenew && <HelpTools onSortClick={onSortClick} sortKey={sortKey} fixedSize={fixedSize} page={page} size={size} onPageChange={onPageChange} length={mediaSorted.length} />}
             bordered
             dataSource={mediaSized}
-            renderItem={(item) => <MediaListItem key={`list_${item.section}_${item.id}`} item={item} />}
+            renderItem={(item) => <MediaListItem key={`list_${item.section}_${item.id}`} item={item} forcenew={forcenew} />}
             />
         </>
 )};

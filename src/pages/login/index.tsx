@@ -40,7 +40,6 @@ export const LoginPage: React.FC = () => {
                     client_id: GOOGLE_CLIENT_ID,
                     callback: async (res: CredentialResponse) => {
                         if (res.credential) {
-                            console.log('CREDENTIALS', res)
                             login(res);
                         }
                     },
